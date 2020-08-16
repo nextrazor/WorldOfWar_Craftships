@@ -8,7 +8,8 @@ public class ShipResizer : MonoBehaviour
     float elapsedResizeSeconds = 0;
 
     // resizing control
-    const float ScaleFactorPerSecond = 0.05f;
+
+    public float ScaleFactorPerSecond = 0.05f;
     int scaleFactorSignMultiplier = 1;
 
 

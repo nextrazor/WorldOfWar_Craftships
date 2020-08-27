@@ -12,7 +12,7 @@ public class ShipController : MonoBehaviour
     float rotationToPerform = 0,
         thrust = 50;
     bool thrustToPerform = false;
-    const float mult = 10; 
+    public float mult = 30; 
     
     void Start()
     {

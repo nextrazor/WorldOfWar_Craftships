@@ -1,0 +1,43 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WaveManager : MonoBehaviour
+ 
+{
+    public static WaveManager instance;
+    public float amplitude = 1f;
+    public float lenght = 2f;
+    public float speed = 1f;
+    public float offset = 0f;
+    
+
+    // Start is called before the first frame update
+
+    void Start()
+    {
+        
+    }
+     private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.Log("Destroying extra object!");
+            Destroy(this);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        offset += Time.deltaTime * speed;
+    }
+    public float GetWaveHeight(float _x)
+    {
+        return amplitude * Mathf.Sin(_x / lenght + offset);
+    }
+}

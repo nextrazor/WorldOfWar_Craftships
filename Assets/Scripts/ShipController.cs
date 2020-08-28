@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -9,10 +10,12 @@ public class ShipController : MonoBehaviour
     [SerializeField]
     Rigidbody shipRB;
 
-    float rotationToPerform = 0,
-        thrust = 50;
+    float rotationToPerform = 0;
     bool thrustToPerform = false;
-    public float mult = 30; 
+    public float mult = 30,
+        //waterUpForce = 5,
+        thrust = 50; 
+
     
     void Start()
     {
@@ -26,6 +29,7 @@ public class ShipController : MonoBehaviour
 
     void Update()
     {
+        //transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         transform.Rotate(new Vector3(0, rotationToPerform * mult * Time.deltaTime, 0));
 
         if (thrustToPerform)
@@ -46,4 +50,10 @@ public class ShipController : MonoBehaviour
     {
         thrustToPerform = false;
     }
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Water")
+    //        shipRB.AddForce(Vector3.up * waterUpForce);
+    //}
 }

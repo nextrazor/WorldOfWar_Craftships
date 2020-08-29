@@ -8,7 +8,12 @@ public class ShipController : MonoBehaviour
     PlayerControlls inputActions;
     [SerializeField]
     Rigidbody shipRB;
-
+    [SerializeField]
+    GameObject cannonball;
+    [SerializeField]
+    GameObject rightCannon;
+    [SerializeField]
+    GameObject leftCannon;
     float rotationToPerform = 0;
     bool thrustToPerform = false;
     public float mult = 30,
@@ -24,6 +29,8 @@ public class ShipController : MonoBehaviour
         inputActions.PlayerActions.Rotate.performed += RotateShip;
         inputActions.PlayerActions.Thrust.started += ThrustEnabled;
         inputActions.PlayerActions.Thrust.canceled += ThrustDisabled;
+        inputActions.PlayerActions.ShootLeftCannon.started += ShootCannonBallL;
+        inputActions.PlayerActions.ShootRightCannon.started += ShootCannonBallR;
     }
 
     void Update()
@@ -39,7 +46,14 @@ public class ShipController : MonoBehaviour
     {
         rotationToPerform = context.ReadValue<Vector2>().x;
     }
-
+    void ShootCannonBallL(CallbackContext context)
+    {
+        GameObject firedBall = Instantiate(cannonball, leftCannon.transform.position, leftCannon.transform.rotation);
+    }
+    void ShootCannonBallR(CallbackContext context)
+    {
+        GameObject firedBall = Instantiate(cannonball, rightCannon.transform.position, rightCannon.transform.rotation);
+    }
     void ThrustEnabled(CallbackContext context)
     {
         thrustToPerform = true;

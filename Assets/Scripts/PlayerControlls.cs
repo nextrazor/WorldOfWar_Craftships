@@ -65,6 +65,22 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShootLeftCannon"",
+                    ""type"": ""Button"",
+                    ""id"": ""3eefa1a4-eaea-4229-9783-8557376d27e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShootRightCannon"",
+                    ""type"": ""Button"",
+                    ""id"": ""103f5f51-779d-4191-9c35-4ea5c8ff51d9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -177,6 +193,28 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""action"": ""SpeedBoost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eaa34401-fa50-4e53-9fb0-52de74d37f91"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootLeftCannon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b799f95-9747-4377-8440-a5808cb53408"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShootRightCannon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,6 +229,8 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         m_PlayerActions_ShootL = m_PlayerActions.FindAction("ShootL", throwIfNotFound: true);
         m_PlayerActions_ShoorR = m_PlayerActions.FindAction("ShoorR", throwIfNotFound: true);
         m_PlayerActions_SpeedBoost = m_PlayerActions.FindAction("SpeedBoost", throwIfNotFound: true);
+        m_PlayerActions_ShootLeftCannon = m_PlayerActions.FindAction("ShootLeftCannon", throwIfNotFound: true);
+        m_PlayerActions_ShootRightCannon = m_PlayerActions.FindAction("ShootRightCannon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,6 +286,8 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_ShootL;
     private readonly InputAction m_PlayerActions_ShoorR;
     private readonly InputAction m_PlayerActions_SpeedBoost;
+    private readonly InputAction m_PlayerActions_ShootLeftCannon;
+    private readonly InputAction m_PlayerActions_ShootRightCannon;
     public struct PlayerActionsActions
     {
         private @PlayerControlls m_Wrapper;
@@ -256,6 +298,8 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         public InputAction @ShootL => m_Wrapper.m_PlayerActions_ShootL;
         public InputAction @ShoorR => m_Wrapper.m_PlayerActions_ShoorR;
         public InputAction @SpeedBoost => m_Wrapper.m_PlayerActions_SpeedBoost;
+        public InputAction @ShootLeftCannon => m_Wrapper.m_PlayerActions_ShootLeftCannon;
+        public InputAction @ShootRightCannon => m_Wrapper.m_PlayerActions_ShootRightCannon;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -283,6 +327,12 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @SpeedBoost.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSpeedBoost;
                 @SpeedBoost.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSpeedBoost;
                 @SpeedBoost.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSpeedBoost;
+                @ShootLeftCannon.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootLeftCannon;
+                @ShootLeftCannon.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootLeftCannon;
+                @ShootLeftCannon.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootLeftCannon;
+                @ShootRightCannon.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootRightCannon;
+                @ShootRightCannon.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootRightCannon;
+                @ShootRightCannon.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootRightCannon;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -305,6 +355,12 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @SpeedBoost.started += instance.OnSpeedBoost;
                 @SpeedBoost.performed += instance.OnSpeedBoost;
                 @SpeedBoost.canceled += instance.OnSpeedBoost;
+                @ShootLeftCannon.started += instance.OnShootLeftCannon;
+                @ShootLeftCannon.performed += instance.OnShootLeftCannon;
+                @ShootLeftCannon.canceled += instance.OnShootLeftCannon;
+                @ShootRightCannon.started += instance.OnShootRightCannon;
+                @ShootRightCannon.performed += instance.OnShootRightCannon;
+                @ShootRightCannon.canceled += instance.OnShootRightCannon;
             }
         }
     }
@@ -317,5 +373,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         void OnShootL(InputAction.CallbackContext context);
         void OnShoorR(InputAction.CallbackContext context);
         void OnSpeedBoost(InputAction.CallbackContext context);
+        void OnShootLeftCannon(InputAction.CallbackContext context);
+        void OnShootRightCannon(InputAction.CallbackContext context);
     }
 }

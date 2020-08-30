@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ForceField : MonoBehaviour
 {
-    // Start is called before the first frame update
+    float elapsedTime = 0;
+
     void Start()
+
     {
         
     }
@@ -21,6 +23,15 @@ public class ForceField : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        if(elapsedTime > 3)
+        {
+            Destroy(gameObject);
+            
+        }
+        else
+        {
+            elapsedTime += Time.deltaTime;
+        }
+    } 
+
 }

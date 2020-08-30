@@ -7,7 +7,11 @@ public class ShipController : MonoBehaviour
 {
     PlayerControlls inputActions;
     [SerializeField]
+    GameObject shieldPlace;
+    [SerializeField]
     Rigidbody shipRB;
+    [SerializeField]
+    GameObject shield;
     [SerializeField]
     GameObject cannonball;
     [SerializeField]
@@ -18,9 +22,10 @@ public class ShipController : MonoBehaviour
     bool thrustToPerform = false;
     public float mult = 30,
         //waterUpForce = 5,
-        thrust = 50; 
-
+        thrust = 50;
     
+
+
     void Start()
     {
         inputActions = new PlayerControlls();
@@ -31,6 +36,8 @@ public class ShipController : MonoBehaviour
         inputActions.PlayerActions.Thrust.canceled += ThrustDisabled;
         inputActions.PlayerActions.ShootLeftCannon.started += ShootCannonBallL;
         inputActions.PlayerActions.ShootRightCannon.started += ShootCannonBallR;
+        inputActions.PlayerActions.ElfShield.started += ShieldUp;
+        
     }
 
     void Update()
@@ -63,7 +70,12 @@ public class ShipController : MonoBehaviour
     {
         thrustToPerform = false;
     }
-
+    void ShieldUp(CallbackContext context)
+    {
+         GameObject activeShield = Instantiate(shield, transform);
+        
+    }
+    
     //private void OnCollisionStay(Collision collision)
     //{
     //    if (collision.gameObject.tag == "Water")

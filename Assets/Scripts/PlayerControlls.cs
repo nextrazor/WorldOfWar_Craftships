@@ -81,6 +81,14 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ElfShield"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b5e2db1-ed3f-4093-bae6-84977de5e270"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -215,6 +223,17 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                     ""action"": ""ShootRightCannon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6a3ab07-2f2b-4569-a927-e29cfaf6c891"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ElfShield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -231,6 +250,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         m_PlayerActions_SpeedBoost = m_PlayerActions.FindAction("SpeedBoost", throwIfNotFound: true);
         m_PlayerActions_ShootLeftCannon = m_PlayerActions.FindAction("ShootLeftCannon", throwIfNotFound: true);
         m_PlayerActions_ShootRightCannon = m_PlayerActions.FindAction("ShootRightCannon", throwIfNotFound: true);
+        m_PlayerActions_ElfShield = m_PlayerActions.FindAction("ElfShield", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,6 +308,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_SpeedBoost;
     private readonly InputAction m_PlayerActions_ShootLeftCannon;
     private readonly InputAction m_PlayerActions_ShootRightCannon;
+    private readonly InputAction m_PlayerActions_ElfShield;
     public struct PlayerActionsActions
     {
         private @PlayerControlls m_Wrapper;
@@ -300,6 +321,7 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         public InputAction @SpeedBoost => m_Wrapper.m_PlayerActions_SpeedBoost;
         public InputAction @ShootLeftCannon => m_Wrapper.m_PlayerActions_ShootLeftCannon;
         public InputAction @ShootRightCannon => m_Wrapper.m_PlayerActions_ShootRightCannon;
+        public InputAction @ElfShield => m_Wrapper.m_PlayerActions_ElfShield;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -333,6 +355,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @ShootRightCannon.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootRightCannon;
                 @ShootRightCannon.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootRightCannon;
                 @ShootRightCannon.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnShootRightCannon;
+                @ElfShield.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnElfShield;
+                @ElfShield.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnElfShield;
+                @ElfShield.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnElfShield;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -361,6 +386,9 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
                 @ShootRightCannon.started += instance.OnShootRightCannon;
                 @ShootRightCannon.performed += instance.OnShootRightCannon;
                 @ShootRightCannon.canceled += instance.OnShootRightCannon;
+                @ElfShield.started += instance.OnElfShield;
+                @ElfShield.performed += instance.OnElfShield;
+                @ElfShield.canceled += instance.OnElfShield;
             }
         }
     }
@@ -375,5 +403,6 @@ public class @PlayerControlls : IInputActionCollection, IDisposable
         void OnSpeedBoost(InputAction.CallbackContext context);
         void OnShootLeftCannon(InputAction.CallbackContext context);
         void OnShootRightCannon(InputAction.CallbackContext context);
+        void OnElfShield(InputAction.CallbackContext context);
     }
 }
